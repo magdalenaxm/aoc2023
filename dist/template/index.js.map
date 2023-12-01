@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/template/index.ts"],
+  "sourcesContent": ["import run from \"aocrunner\";\n\nconst parseInput = (rawInput: string) => rawInput;\n\nconst part1 = (rawInput: string) => {\n  const input = parseInput(rawInput);\n\n  return;\n};\n\nconst part2 = (rawInput: string) => {\n  const input = parseInput(rawInput);\n\n  return;\n};\n\nrun({\n  part1: {\n    tests: [\n      // {\n      //   input: ``,\n      //   expected: \"\",\n      // },\n    ],\n    solution: part1,\n  },\n  part2: {\n    tests: [\n      // {\n      //   input: ``,\n      //   expected: \"\",\n      // },\n    ],\n    solution: part2,\n  },\n  trimTestInputs: true,\n  onlyTests: false,\n});\n"],
+  "mappings": "AAAA,OAAO,SAAS;AAEhB,MAAM,aAAa,CAAC,aAAqB;AAEzC,MAAM,QAAQ,CAAC,aAAqB;AAClC,QAAM,QAAQ,WAAW,QAAQ;AAEjC;AACF;AAEA,MAAM,QAAQ,CAAC,aAAqB;AAClC,QAAM,QAAQ,WAAW,QAAQ;AAEjC;AACF;AAEA,IAAI;AAAA,EACF,OAAO;AAAA,IACL,OAAO,CAKP;AAAA,IACA,UAAU;AAAA,EACZ;AAAA,EACA,OAAO;AAAA,IACL,OAAO,CAKP;AAAA,IACA,UAAU;AAAA,EACZ;AAAA,EACA,gBAAgB;AAAA,EAChB,WAAW;AACb,CAAC;",
+  "names": []
+}
