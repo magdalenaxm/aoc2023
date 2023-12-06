@@ -46,11 +46,8 @@ const part1 = (rawInput: string) => {
   return Math.min(...locations);
 };
 
-const arrayRange = (start: number, stop: number, step = 1) =>
-    Array.from(
-    { length: (stop - start) / step + 1 },
-    (value, index) => start + index * step
-    );
+type BigRange = { destinationRangeStart: bigint; sourceRangeStart: bigint; range: bigint }
+
 
 const part2 = (rawInput: string) => {
  
@@ -58,36 +55,37 @@ const part2 = (rawInput: string) => {
 
   const lines = input.split("\n\n")
   const seedsInput = lines[0].substring(lines[0].indexOf(":") + 1).trim().split(" ").map(seed => parseInt(seed))
-  const maps: Range[][] = []
-  const locations = []
+  const maps: BigRange[][] = []
+  const locations: BigInt[] = []
 
   lines.forEach(line => {
     let rows = line.split("\n");
     rows.shift()
-    const ranges: Range[] = []
+    const ranges: BigRange[] = []
 
     rows.forEach(row => {
       const values = row.split(" ");
       ranges.push({
-        destinationRangeStart: parseInt(values[0]),
-        sourceRangeStart: parseInt(values[1]),
-        range: parseInt(values[2])
+        destinationRangeStart: BigInt(parseInt(values[0])),
+        sourceRangeStart: BigInt(parseInt(values[1])),
+        range: BigInt(parseInt(values[2]))
       })
     })
 
     maps.push(ranges)
   })
-// const seeds = [...arrayRange(seedsInput[0], seedsInput[0] + (seedsInput[1] - 1)),...arrayRange(seedsInput[2], seedsInput[2] + seedsInput[3] - 1)]
+
 
 
   for(let i = seedsInput[0]; i < seedsInput[0] + (seedsInput[1] - 1); i++){
-      let sourceNumber = i;
+      let sourceNumber = i as unknown as bigint;
 
     for (let i = 1; i <= maps.length - 1; i++) {
-      const assigendRange = maps[i].find(map => sourceNumber >= map.sourceRangeStart && sourceNumber <= (map.sourceRangeStart + map.range - 1))
+      
+      const assigendRange = maps[i].find(map => sourceNumber >= map.sourceRangeStart && sourceNumber <= (BigInt(map.sourceRangeStart) + BigInt(map.range) - BigInt(1)))
 
       if (assigendRange) {
-        sourceNumber = sourceNumber - assigendRange.sourceRangeStart + assigendRange.destinationRangeStart;
+        sourceNumber = BigInt(sourceNumber) - BigInt(assigendRange.sourceRangeStart) + BigInt(assigendRange.destinationRangeStart);
       }
     }
 
@@ -104,7 +102,7 @@ const part2 = (rawInput: string) => {
   
 
 
-  return Math.min(...locations);
+  return locations.reduce((m, e) => e < m ? e : m);
 };
 
 run({
